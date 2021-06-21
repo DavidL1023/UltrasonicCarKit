@@ -21,6 +21,8 @@
 #define IR_Left    0x44
 #define IR_Right   0x43
 #define IR_Stop    0x40
+#define Enable_Auto 0x4A
+#define Enable_Manual 0x42
 
 // objects
 Servo sonarServo;
@@ -28,18 +30,9 @@ Ultrasonic sonar(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
 IRrecv infrared(IR_RECV_PIN);
 
 // variables
-int CAR_SPEED = 180; // for PWM maximum possible values are 0 to 255
+int CAR_SPEED = 120; // for PWM maximum possible values are 0 to 255
 
 // functions
-void servoFunc(){
-  sonarServo.write(90); // 0 to 180
-}
-int ultrasonicFunc(){
-  Serial.println("Object distance CM:");
-  Serial.println(sonar.read());
-  return sonar.read();
-}
-
 void drive(){ // for motors
      digitalWrite(pinRB,LOW);
      digitalWrite(pinRF,HIGH);
@@ -71,7 +64,7 @@ void reverse(){
      digitalWrite(pinLF,LOW);
 }
 
-void remoteControlCar(){
+void remoteControlCar(){ // CONTROL MANUALLY
   //recieve data
   int decoded;
   if(infrared.decode()){
@@ -80,8 +73,6 @@ void remoteControlCar(){
     infrared.resume(); // recieve next value
   }
   // control motors
-  analogWrite(Lpwm_pin, CAR_SPEED);
-  analogWrite(Rpwm_pin, CAR_SPEED);
   switch(decoded){
     case(IR_Go):
       drive();
@@ -101,8 +92,43 @@ void remoteControlCar(){
   }
 }
 
-void autoCar(){
+void autoCar(){ // CONTROLS AUTOMATICALLY
+  int frontDistance;
+  int leftDistance;
+  int rightDistance;
 
+  sonarServo.write(90);
+  frontDistance = sonar.read(); // in centimeters
+  delay(15);
+  drive();
+
+  if(frontDistance < 30){
+    stopp();
+    sonarServo.write(180);
+    leftDistance = sonar.read();
+    delay(600);
+
+    sonarServo.write(0);
+    rightDistance = sonar.read();
+    delay(600);
+
+    if(leftDistance > rightDistance){
+      reverse();
+      delay(100);
+      turnL();
+      delay(400);
+    }
+    else if(leftDistance < rightDistance){
+      reverse();
+      delay(100);
+      turnR();
+      delay(400);
+    }
+    else if(leftDistance == rightDistance){
+      reverse();
+      delay(400);
+    }
+  }
 }
 
 // ARDUINO
@@ -119,10 +145,25 @@ void setup() {
   pinMode(pinRF,OUTPUT); 
   pinMode(Lpwm_pin,OUTPUT);  
   pinMode(Rpwm_pin,OUTPUT); 
+
+  // start motor
+  analogWrite(Lpwm_pin, CAR_SPEED);
+  analogWrite(Rpwm_pin, CAR_SPEED);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  servoFunc();
-  remoteControlCar();
+  int decoded; //recieve data
+  if(infrared.decode()){
+    decoded = infrared.decodedIRData.command;
+    Serial.println(decoded);
+    infrared.resume(); // recieve next value
+  }
+
+  while(decoded == Enable_Manual){
+    remoteControlCar();
+  }
+  while(decoded == Enable_Auto){
+    autoCar();
+  }
 }
