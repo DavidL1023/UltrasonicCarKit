@@ -30,7 +30,8 @@ Ultrasonic sonar(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
 IRrecv infrared(IR_RECV_PIN);
 
 // variables
-int CAR_SPEED = 120; // for PWM maximum possible values are 0 to 255
+int CAR_SPEED_AUTO = 120; // for PWM maximum possible values are 0 to 255
+int CAR_SPEED_REMOTE = 150;
 
 // functions
 void drive(){ // for motors
@@ -94,15 +95,16 @@ void remoteControlCar(){ // CONTROL MANUALLY
 
 void autoCar(){ // CONTROLS AUTOMATICALLY
   int frontDistance;
-  int leftDistance;
-  int rightDistance;
 
-  sonarServo.write(90);
+  sonarServo.write(85); // it's 85 because servo is a little off from the center
   frontDistance = sonar.read(); // in centimeters
   delay(15);
   drive();
 
-  if(frontDistance < 30){
+  if(frontDistance < 25){
+    int leftDistance;
+    int rightDistance;
+
     stopp();
     sonarServo.write(180);
     leftDistance = sonar.read();
@@ -112,19 +114,22 @@ void autoCar(){ // CONTROLS AUTOMATICALLY
     rightDistance = sonar.read();
     delay(600);
 
+    sonarServo.write(85);
+    delay(200);
+
     if(leftDistance > rightDistance){
       reverse();
-      delay(100);
+      delay(180);
       turnL();
       delay(400);
     }
-    else if(leftDistance < rightDistance){
+    if(leftDistance < rightDistance){
       reverse();
-      delay(100);
+      delay(180);
       turnR();
       delay(400);
     }
-    else if(leftDistance == rightDistance){
+    if(leftDistance == rightDistance){
       reverse();
       delay(400);
     }
@@ -145,10 +150,6 @@ void setup() {
   pinMode(pinRF,OUTPUT); 
   pinMode(Lpwm_pin,OUTPUT);  
   pinMode(Rpwm_pin,OUTPUT); 
-
-  // start motor
-  analogWrite(Lpwm_pin, CAR_SPEED);
-  analogWrite(Rpwm_pin, CAR_SPEED);
 }
 
 void loop() {
@@ -161,9 +162,14 @@ void loop() {
   }
 
   while(decoded == Enable_Manual){
+    // start motor
+    analogWrite(Lpwm_pin, CAR_SPEED_REMOTE);
+    analogWrite(Rpwm_pin, CAR_SPEED_REMOTE);
     remoteControlCar();
   }
   while(decoded == Enable_Auto){
+    analogWrite(Lpwm_pin, CAR_SPEED_AUTO);
+    analogWrite(Rpwm_pin, CAR_SPEED_AUTO);
     autoCar();
   }
 }
