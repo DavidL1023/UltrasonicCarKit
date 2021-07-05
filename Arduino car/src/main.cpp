@@ -96,7 +96,7 @@ void remoteControlCar(){ // CONTROL MANUALLY
 void autoCar(){ // CONTROLS AUTOMATICALLY
   int frontDistance;
 
-  sonarServo.write(85); // it's 85 because servo is a little off from the center
+  sonarServo.write(85); // it's 85 and not 90 because servo is a little off from the center
   frontDistance = sonar.read(); // in centimeters
   delay(15);
   drive();
@@ -107,27 +107,33 @@ void autoCar(){ // CONTROLS AUTOMATICALLY
 
     stopp();
     sonarServo.write(180);
-    leftDistance = sonar.read();
     delay(600);
+    leftDistance = sonar.read();
 
     sonarServo.write(0);
-    rightDistance = sonar.read();
     delay(600);
+    rightDistance = sonar.read();
 
     sonarServo.write(85);
     delay(200);
 
+    Serial.print(leftDistance, DEC);
+    Serial.print(" <--leftCM - rightCM--> ");
+    Serial.print(rightDistance, DEC);
+
     if(leftDistance > rightDistance){
+      Serial.print("\nTurning left\n");
       reverse();
       delay(180);
       turnL();
-      delay(400);
+      delay(320);
     }
     if(leftDistance < rightDistance){
+      Serial.print("\nTurning right\n");
       reverse();
       delay(180);
       turnR();
-      delay(400);
+      delay(320);
     }
     if(leftDistance == rightDistance){
       reverse();
