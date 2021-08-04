@@ -1,5 +1,7 @@
-# Arduino Car Kit
-I created a remote and automatic car out of an arduino car kit Anton gave me.
+# ~Anton Arduino Kits
+I created a remote control and automatic car out of an arduino car kit Anton gave me. 
+
+Also, tribute to the arduino crane that broke below
 
 # Libraries used
 [Arduino.h](https://www.arduino.cc/en/software) /
@@ -17,4 +19,7 @@ Arrow buttons to choose direction, car continues to move on its own without havi
 Car drives itself easy peasy. It has a radar attached to a servo so that if it gets close to a wall it will check its left and right and drive whichever direction has more distance from a wall.
 
 # Video in Action
-[Arduino Car Kit](https://youtu.be/S2veobpOqNU)
+## [Arduino Car Kit](https://youtu.be/S2veobpOqNU)
+
+### TRIBUTE TO broken arduino-crane ;(
+#### [arduino crane kit...](https://youtu.be/_CXsXEtQCsw)
