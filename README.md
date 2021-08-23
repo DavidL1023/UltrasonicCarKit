@@ -1,14 +1,11 @@
 # ~Anton Arduino Kits
 I created a remote control and automatic car out of an arduino car kit Anton gave me. 
 
-Also, tribute to the arduino crane that broke below
-
 # Libraries used
 [Arduino.h](https://www.arduino.cc/en/software) /
 [Servo.h](https://github.com/arduino-libraries/Servo?utm_source=platformio&utm_medium=piohome) /
 [Ultrasonic.h](https://github.com/ErickSimoes/Ultrasonic?utm_source=platformio&utm_medium=piohome) /
 [IRremote.h](https://github.com/Arduino-IRremote/Arduino-IRremote?utm_source=platformio&utm_medium=piohome)
-
 
 ## How To Use
 Once you turn on the battery pack, you may use the IR controller to choose whether or not you want the remote or automatic mode enabled. **Asterick** key stars remote, **pound** key starts auto. Turn off Car and wait 2 seconds if you want to choose another mode.
@@ -20,6 +17,3 @@ Car drives itself easy peasy. It has a radar attached to a servo so that if it g
 
 # Video in Action
 ## [Arduino Car Kit](https://youtu.be/S2veobpOqNU)
-
-### TRIBUTE TO broken arduino-crane ;(
-#### [arduino crane kit...](https://youtu.be/_CXsXEtQCsw)
