@@ -1,7 +1,7 @@
 # ~Anton Arduino Kits
 I created a remote control and automatic car out of an arduino car kit Anton gave me. 
 
-# Libraries used
+# Dependencies
 [Arduino.h](https://www.arduino.cc/en/software) /
 [Servo.h](https://github.com/arduino-libraries/Servo?utm_source=platformio&utm_medium=piohome) /
 [Ultrasonic.h](https://github.com/ErickSimoes/Ultrasonic?utm_source=platformio&utm_medium=piohome) /
