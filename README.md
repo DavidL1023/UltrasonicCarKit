@@ -1,5 +1,5 @@
 # ~Anton Arduino Kits
-I created a remote control and automatic car out of an arduino car kit Anton gave me. 
+I created a remote control / automatic car out of an arduino car kit Anton gave me. Working with robots was fun, and seeing it come to life is cool. Learned lots about C++, the language isn't very different from what I've worked with before. I also had an Arduino crane but it's construction was not perfect so the servos burned out, rip.
 
 # Dependencies
 [Arduino.h](https://www.arduino.cc/en/software) /
