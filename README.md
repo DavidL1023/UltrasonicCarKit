@@ -3,7 +3,7 @@ I created a remote control / automatic car out of an arduino car kit Anton gave 
 
 NOTE: I used the Platform.io extension to create this project on VSCode, it's probably best to use that when running this.
 
-[The Arduino kit I used](https://www.amazon.com/dp/B07DLVDP1N/ref=cm_sw_r_u_apa_glt_fabc_JQBNQVJSVFYMPSP7CAX2#customerReviews)
+[The Arduino kit I used](https://www.amazon.com/LAFVIN-Chassis-Ultrasonic-Compatible-Arduino/dp/B07YCHCQNK/ref=cm_cr_arp_d_pdt_img_top?ie=UTF8)
 
 # Dependencies
 [Arduino.h](https://www.arduino.cc/en/software) /
