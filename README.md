@@ -19,5 +19,5 @@ Arrow buttons to choose direction, car continues to move on its own without havi
 ### ---Auto mode---
 Car drives itself easy peasy. It has a radar attached to a servo so that if it gets close to a wall it will check its left and right and drive whichever direction has more distance from a wall.
 
-# Video in Action
-## [Arduino Car Kit](https://youtu.be/S2veobpOqNU)
+# Action
+
